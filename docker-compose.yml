@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=your-secret-key-here
+    volumes:
+      - ./uploads:/app/uploads
+      - ./app_store.db:/app/app_store.db
+    restart: unless-stopped
+
+  # Optional: PostgreSQL database for production
+  # db:
+  #   image: postgres:13
+  #   environment:
+  #     - POSTGRES_DB=app_store
+  #     - POSTGRES_USER=appstore
+  #     - POSTGRES_PASSWORD=your-password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres_data:
